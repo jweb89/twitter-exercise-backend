@@ -1,11 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const Twitter = require('twitter');
+const cors=require('cors')
 
 const client = new Twitter({
-  consumer_key: '',
-  consumer_secret: '',
-  access_token_key: '',
-  access_token_secret: ''
+  consumer_key: process.env.API_KEY,
+  consumer_secret: process.env.API_SECRET_KEY,
+  bearer_token: process.env.BEARER_TOKEN
 });
  
 const defaults = {
@@ -15,6 +16,7 @@ const defaults = {
 };
 
 const app = express();
+app.use(cors());
 
 app.route('/:handle')
   .get(function(req, res) {
